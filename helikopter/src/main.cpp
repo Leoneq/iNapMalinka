@@ -7,10 +7,10 @@
 #define PIN_CSN PCINT9
 #define PIN_CE PCINT10
 #define PIN_LED PCINT8
-#define PIN_MX_A1 PCINT2
-#define PIN_MX_A2 PCINT0
-#define PIN_MX_B1 PCINT1
-#define PIN_MX_B2 PCINT3
+#define PIN_MX_A1 8
+#define PIN_MX_A2 10
+#define PIN_MX_B1 9
+#define PIN_MX_B2 7
 
 #define INTERVAL 50
 
@@ -20,9 +20,10 @@ const byte address[6] = "00001";
 
 struct packet
 {
-    uint8_t PWM_LED = 30;
-    uint8_t PWM_MAIN;
-    uint8_t PWM_BACK;
+    uint8_t PWM_LED = 0;
+    uint8_t PWM_TOP = 255;
+    uint8_t PWM_BOT = 255;
+    uint8_t PWM_BACK = 0;
 } data;
 uint8_t battery = 0;
 uint16_t x = 0;
@@ -36,13 +37,20 @@ void setup()
 {
     radio.begin();
     radio.openReadingPipe(0, address);
-    //radio.setPALevel(RF24_PA_MIN);
+    radio.setPALevel(RF24_PA_MIN);
     radio.startListening();
     pinMode(PIN_LED, OUTPUT);
-    pinMode(PIN_MX_B2, OUTPUT);
+    pinMode(PIN_MX_A1, OUTPUT);
     pinMode(PIN_MX_B1, OUTPUT);
     pinMode(PIN_MX_A2, OUTPUT);
-    pinMode(PIN_MX_A1, OUTPUT);
+    pinMode(PIN_MX_B2, OUTPUT);
+    digitalWrite(PIN_LED, HIGH);
+    delay(100);
+    digitalWrite(PIN_LED, LOW);
+    delay(100);
+    digitalWrite(PIN_LED, HIGH);
+    delay(100);
+    digitalWrite(PIN_LED, LOW);
 }
 
 void loop()
@@ -57,36 +65,32 @@ void loop()
 void handlePWM()
 {
     PWM_counter = micros() / INTERVAL;
+    
     if(PWM_counter < data.PWM_LED) digitalWrite(PIN_LED, HIGH);
     else digitalWrite(PIN_LED, LOW);
 
-    if(PWM_counter < data.PWM_MAIN)
-    {
-        digitalWrite(PIN_A1, HIGH);
-        digitalWrite(PIN_B1, HIGH);
-    } else
-    {
-        digitalWrite(PIN_A1, LOW);
-        digitalWrite(PIN_B1, LOW);
-    }
+    if(PWM_counter < data.PWM_BOT) digitalWrite(PIN_MX_A1, HIGH);
+    else digitalWrite(PIN_MX_A1, LOW);    
 
-    if(PWM_counter < data.PWM_BACK)
+    if(PWM_counter < data.PWM_TOP) digitalWrite(PIN_MX_B1, HIGH);
+    else digitalWrite(PIN_MX_B1, LOW);   
+
+    if(PWM_counter < ((data.PWM_BACK & 0b01111111)*2))
     {
-        if(bitRead(data.PWM_BACK, 8))
+        if(bitRead(data.PWM_BACK,7))
         {
-            digitalWrite(PIN_A2, HIGH);
-            digitalWrite(PIN_A1, LOW);
+            digitalWrite(PIN_MX_A2, HIGH);
+            digitalWrite(PIN_MX_B2, LOW);
         }
         else
         {
-            digitalWrite(PIN_A1, HIGH);
-            digitalWrite(PIN_A2, LOW);
+            digitalWrite(PIN_MX_A2, LOW);
+            digitalWrite(PIN_MX_B2, HIGH);
         }
-    } else
+    }
+    else
     {
-        if(bitRead(data.PWM_BACK, 8))
-            digitalWrite(PIN_A2, LOW);
-        else
-            digitalWrite(PIN_A1, LOW);
+        digitalWrite(PIN_MX_A2, LOW);
+        digitalWrite(PIN_MX_B2, LOW);
     }
 }
