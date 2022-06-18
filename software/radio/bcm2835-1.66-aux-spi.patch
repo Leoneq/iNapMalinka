@@ -1,0 +1,531 @@
+diff -Naur a/src/bcm2835.c b/src/bcm2835.c
+--- a/src/bcm2835.c	2020-04-15 14:35:14.000000000 -0700
++++ b/src/bcm2835.c	2020-04-20 14:02:50.000000000 -0700
+@@ -933,6 +933,26 @@
+ #endif
+ }
+ 
++static uint8_t  spi1_useCS0   = 0;
++static uint8_t  spi1_useCS1   = 0;
++static uint8_t  spi1_useCS2   = 1;
++static uint32_t spi1_csBits   = BCM2835_AUX_SPI_CNTL0_CS2_N;
++static uint32_t spi1_speed    = BCM2835_CORE_CLK_HZ/(2*1000000) - 1;
++static uint8_t  spi1_mode     = BCM2835_AUX_SPI_MODE_COMPATIBLE;
++static uint8_t  spi1_bitOrder = BCM2835_AUX_SPI_MSBFIRST;
++static uint32_t spi1_doutHold = BCM2835_AUX_SPI_CNTL0_DOUTHOLD0;
++static const int  shiftsRxMSB[] = { 24, 16,  8,  0 };		// MSB bit order Rx fifo shifts
++static const int  shiftsRxLSB[] = {  0,  8, 16, 24 };		// LSB bit order Rx fifo shifts
++static const int  shiftsTxMSB[] = { 16,  8,  0 };		// MSB bit order Tx fifo shifts
++static const int  shiftsTxLSB[] = {  0,  8, 16 };		// LSB bit order Tx fifo shifts
++
++int bcm2835_aux_spi_useChipSelects(uint8_t cs0, uint8_t cs1, uint8_t cs2)
++{
++    spi1_useCS0 = cs0;
++    spi1_useCS1 = cs1;
++    spi1_useCS2 = cs2;
++}
++
+ int bcm2835_aux_spi_begin(void)
+ {
+     volatile uint32_t* enable = bcm2835_aux + BCM2835_AUX_ENABLE/4;
+@@ -940,10 +960,15 @@
+     volatile uint32_t* cntl1 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL1/4;
+ 
+     if (bcm2835_spi1 == MAP_FAILED)
+-	return 0; /* bcm2835_init() failed, or not root */
++        return 0; /* bcm2835_init() failed, or not root */
+ 
+     /* Set the SPI pins to the Alt 4 function to enable SPI1 access on them */
+-    bcm2835_gpio_fsel(RPI_V2_GPIO_P1_36, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_CE2_N */
++    if (spi1_useCS0)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_12, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_CE0_N */
++    if (spi1_useCS1)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_11, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_CE1_N */
++    if (spi1_useCS2)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_36, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_CE2_N */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_35, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_MISO */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_38, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_MOSI */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_40, BCM2835_GPIO_FSEL_ALT4);	/* SPI1_SCLK */
+@@ -960,7 +985,12 @@
+ void bcm2835_aux_spi_end(void)
+ {
+     /* Set all the SPI1 pins back to input */
+-    bcm2835_gpio_fsel(RPI_V2_GPIO_P1_36, BCM2835_GPIO_FSEL_INPT);	/* SPI1_CE2_N */
++    if (spi1_useCS0)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_12, BCM2835_GPIO_FSEL_INPT);	/* SPI1_CE0_N */
++    if (spi1_useCS1)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_11, BCM2835_GPIO_FSEL_INPT);	/* SPI1_CE1_N */
++    if (spi1_useCS2)
++        bcm2835_gpio_fsel(RPI_V2_GPIO_P1_36, BCM2835_GPIO_FSEL_INPT);	/* SPI1_CE2_N */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_35, BCM2835_GPIO_FSEL_INPT);	/* SPI1_MISO */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_38, BCM2835_GPIO_FSEL_INPT);	/* SPI1_MOSI */
+     bcm2835_gpio_fsel(RPI_V2_GPIO_P1_40, BCM2835_GPIO_FSEL_INPT);	/* SPI1_SCLK */
+@@ -987,41 +1017,94 @@
+     return divider;
+ }
+ 
+-static uint32_t spi1_speed;
+-
+ void bcm2835_aux_spi_setClockDivider(uint16_t divider)
+ {
+     spi1_speed = (uint32_t) divider;
+ }
+ 
+-void bcm2835_aux_spi_write(uint16_t data)
++void bcm2835_aux_spi_prepare(uint8_t cs, uint32_t speed_hz, uint8_t mode, uint8_t bitorder, uint8_t douthold)
++{
++    switch (cs)
++    {
++      case BCM2835_AUX_SPI_CS0:		spi1_csBits = BCM2835_AUX_SPI_CNTL0_CS0_N;		break;
++      case BCM2835_AUX_SPI_CS1:		spi1_csBits = BCM2835_AUX_SPI_CNTL0_CS1_N;		break;
++      case BCM2835_AUX_SPI_CS2:		spi1_csBits = BCM2835_AUX_SPI_CNTL0_CS2_N;		break;
++      case BCM2835_AUX_SPI_CS_NONE:	spi1_csBits = BCM2835_AUX_SPI_CNTL0_CS_NONE;		break;
++    }
++
++    if (speed_hz)
++        bcm2835_aux_spi_setClockDivider(bcm2835_aux_spi_CalcClockDivider(speed_hz));
++
++    /* Note: modes 1 and 3 are not correctly supported by AUX SPI hardware */
++    if (mode == BCM2835_AUX_SPI_MODE0 || mode == BCM2835_AUX_SPI_MODE2 || mode == BCM2835_AUX_SPI_MODE_COMPATIBLE)
++        spi1_mode = mode;
++
++    if (bitorder == BCM2835_AUX_SPI_LSBFIRST || bitorder == BCM2835_AUX_SPI_MSBFIRST)
++        spi1_bitOrder = bitorder;
++
++    switch (douthold)
++    {
++      case BCM2835_AUX_SPI_DOUTHOLD_0:	spi1_doutHold = BCM2835_AUX_SPI_CNTL0_DOUTHOLD0;	break;
++      case BCM2835_AUX_SPI_DOUTHOLD_1:	spi1_doutHold = BCM2835_AUX_SPI_CNTL0_DOUTHOLD1;	break;
++      case BCM2835_AUX_SPI_DOUTHOLD_4:	spi1_doutHold = BCM2835_AUX_SPI_CNTL0_DOUTHOLD4;	break;
++      case BCM2835_AUX_SPI_DOUTHOLD_7:	spi1_doutHold = BCM2835_AUX_SPI_CNTL0_DOUTHOLD;		break;
++    }
++}
++
++static void bcm2835_aux_spi_setup(uint8_t shiftlen)
+ {
+     volatile uint32_t* cntl0 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL0/4;
+     volatile uint32_t* cntl1 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL1/4;
+-    volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
+-    volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++    uint32_t _cntl0 = 0;
++    uint32_t _cntl1 = 0;
+ 
+-    uint32_t _cntl0 = (spi1_speed << BCM2835_AUX_SPI_CNTL0_SPEED_SHIFT);
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_CS2_N;
+     _cntl0 |= BCM2835_AUX_SPI_CNTL0_ENABLE;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_MSBF_OUT;
+-    _cntl0 |= 16; // Shift length
++    _cntl0 |= (spi1_speed << BCM2835_AUX_SPI_CNTL0_SPEED_SHIFT);
++    _cntl0 |= spi1_csBits;
++    _cntl0 |= spi1_doutHold;
++
++    if (spi1_bitOrder == BCM2835_AUX_SPI_MSBFIRST)
++    {
++        _cntl0 |= BCM2835_AUX_SPI_CNTL0_MSBF_OUT;
++        _cntl1 |= BCM2835_AUX_SPI_CNTL1_MSBF_IN;
++    }
++
++    if (spi1_mode == BCM2835_AUX_SPI_MODE2)					/* SPI_CPOL = 1 */
++        _cntl0 |= (BCM2835_AUX_SPI_CNTL0_CPOL|BCM2835_AUX_SPI_CNTL0_CPHA_OUT);
++    else if (spi1_mode == BCM2835_AUX_SPI_MODE0)				/* SPI_CPOL = 0 */
++        _cntl0 |= BCM2835_AUX_SPI_CNTL0_CPHA_IN;
++    else if (spi1_mode == BCM2835_AUX_SPI_MODE_COMPATIBLE && shiftlen == 8)	/* backwards compatibility for bcm2835_aux_spi_transfer() */
++        _cntl0 |= BCM2835_AUX_SPI_CNTL0_CPHA_IN;
++
++    if (shiftlen)
++        _cntl0 |= (shiftlen&BCM2835_AUX_SPI_CNTL0_SHIFTLEN);
++    else
++        _cntl0 |= BCM2835_AUX_SPI_CNTL0_VAR_WIDTH;
+ 
+     bcm2835_peri_write(cntl0, _cntl0);
+-    bcm2835_peri_write(cntl1, BCM2835_AUX_SPI_CNTL1_MSBF_IN);
++    bcm2835_peri_write(cntl1, _cntl1);
++}
++
++void bcm2835_aux_spi_write(uint16_t data)
++{
++    volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
++    volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++    const uint8_t nBits = 16;								// Shift length = 16
++    const int shiftTx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? 32-nBits : 0;	// Tx fifo shift
++
++    bcm2835_aux_spi_setup(nBits);
+ 
+     while (bcm2835_peri_read(stat) & BCM2835_AUX_SPI_STAT_TX_FULL)
+ 	;
+ 
+-    bcm2835_peri_write(io, (uint32_t) data << 16);
++    bcm2835_peri_write(io, (uint32_t) data << shiftTx);
+ }
+ 
+ void bcm2835_aux_spi_writenb(const char *tbuf, uint32_t len) {
+-    volatile uint32_t* cntl0 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL0/4;
+-    volatile uint32_t* cntl1 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL1/4;
+     volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
+     volatile uint32_t* txhold = bcm2835_spi1 + BCM2835_AUX_SPI_TXHOLD/4;
+     volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++    const int* shiftsTx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? shiftsTxMSB : shiftsTxLSB;
+ 
+     char *tx = (char *) tbuf;
+     uint32_t tx_len = len;
+@@ -1030,14 +1113,7 @@
+     uint32_t i;
+     uint8_t byte;
+ 
+-    uint32_t _cntl0 = (spi1_speed << BCM2835_AUX_SPI_CNTL0_SPEED_SHIFT);
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_CS2_N;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_ENABLE;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_MSBF_OUT;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_VAR_WIDTH;
+-
+-    bcm2835_peri_write(cntl0, _cntl0);
+-    bcm2835_peri_write(cntl1, BCM2835_AUX_SPI_CNTL1_MSBF_IN);
++    bcm2835_aux_spi_setup(0);		// Variable shift length
+ 
+     while (tx_len > 0) {
+ 
+@@ -1049,7 +1125,7 @@
+ 
+ 	for (i = 0; i < count; i++) {
+ 	    byte = (tx != NULL) ? (uint8_t) *tx++ : (uint8_t) 0;
+-	    data |= byte << (8 * (2 - i));
++	    data |= byte << shiftsTx[i];
+ 	}
+ 
+ 	data |= (count * 8) << 24;
+@@ -1069,11 +1145,11 @@
+ }
+ 
+ void bcm2835_aux_spi_transfernb(const char *tbuf, char *rbuf, uint32_t len) {
+-    volatile uint32_t* cntl0 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL0/4;
+-    volatile uint32_t* cntl1 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL1/4;
+-    volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
+-    volatile uint32_t* txhold = bcm2835_spi1 + BCM2835_AUX_SPI_TXHOLD/4;
+-    volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++	volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
++	volatile uint32_t* txhold = bcm2835_spi1 + BCM2835_AUX_SPI_TXHOLD/4;
++	volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++	const int* shiftsTx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? shiftsTxMSB : shiftsTxLSB;
++	const int* shiftsRx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? shiftsRxMSB : shiftsRxLSB;
+ 
+ 	char *tx = (char *)tbuf;
+ 	char *rx = (char *)rbuf;
+@@ -1084,14 +1160,7 @@
+ 	uint32_t i;
+ 	uint8_t byte;
+ 
+-	uint32_t _cntl0 = (spi1_speed << BCM2835_AUX_SPI_CNTL0_SPEED_SHIFT);
+-	_cntl0 |= BCM2835_AUX_SPI_CNTL0_CS2_N;
+-	_cntl0 |= BCM2835_AUX_SPI_CNTL0_ENABLE;
+-	_cntl0 |= BCM2835_AUX_SPI_CNTL0_MSBF_OUT;
+-	_cntl0 |= BCM2835_AUX_SPI_CNTL0_VAR_WIDTH;
+-
+-	bcm2835_peri_write(cntl0, _cntl0);
+-	bcm2835_peri_write(cntl1, BCM2835_AUX_SPI_CNTL1_MSBF_IN);
++	bcm2835_aux_spi_setup(0);		// Variable shift length
+ 
+ 	while ((tx_len > 0) || (rx_len > 0)) {
+ 
+@@ -1101,7 +1170,7 @@
+ 
+ 			for (i = 0; i < count; i++) {
+ 				byte = (tx != NULL) ? (uint8_t) *tx++ : (uint8_t) 0;
+-				data |= byte << (8 * (2 - i));
++				data |= byte << shiftsTx[i];
+ 			}
+ 
+ 			data |= (count * 8) << 24;
+@@ -1122,15 +1191,15 @@
+ 			if (rbuf != NULL) {
+ 				switch (count) {
+ 				case 3:
+-					*rx++ = (char)((data >> 16) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[1]) & 0xFF);
+ 					/*@fallthrough@*/
+ 					/* no break */
+ 				case 2:
+-					*rx++ = (char)((data >> 8) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[2]) & 0xFF);
+ 					/*@fallthrough@*/
+ 					/* no break */
+ 				case 1:
+-					*rx++ = (char)((data >> 0) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[3]) & 0xFF);
+ 				}
+ 			}
+ 
+@@ -1144,15 +1213,15 @@
+ 			if (rbuf != NULL) {
+ 				switch (count) {
+ 				case 3:
+-					*rx++ = (char)((data >> 16) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[1]) & 0xFF);
+ 					/*@fallthrough@*/
+ 					/* no break */
+ 				case 2:
+-					*rx++ = (char)((data >> 8) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[2]) & 0xFF);
+ 					/*@fallthrough@*/
+ 					/* no break */
+ 				case 1:
+-					*rx++ = (char)((data >> 0) & 0xFF);
++					*rx++ = (char)((data >> shiftsRx[3]) & 0xFF);
+ 				}
+ 			}
+ 
+@@ -1168,33 +1237,52 @@
+ /* Writes (and reads) a single byte to AUX SPI */
+ uint8_t bcm2835_aux_spi_transfer(uint8_t value)
+ {
+-    volatile uint32_t* cntl0 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL0/4;
+-    volatile uint32_t* cntl1 = bcm2835_spi1 + BCM2835_AUX_SPI_CNTL1/4;
+     volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
+     volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++    const uint8_t nBits = 8;								// Shift length = 8
++    const int shiftTx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? 32-nBits : 0;	// Tx fifo shift
++    const int shiftRx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? 0 : 32-nBits;	// Rx fifo shift
++
++    bcm2835_aux_spi_setup(nBits);
++
++    if (spi1_mode == BCM2835_AUX_SPI_MODE_COMPATIBLE && spi1_bitOrder == BCM2835_AUX_SPI_MSBFIRST)
++        value = bcm2835_correct_order(value);
++    bcm2835_peri_write(io, (uint32_t)value << shiftTx);
+ 
+-    uint32_t data;
++    while (bcm2835_peri_read(stat) & BCM2835_AUX_SPI_STAT_BUSY)
++        ;
+ 
+-    uint32_t _cntl0 = (spi1_speed << BCM2835_AUX_SPI_CNTL0_SPEED_SHIFT);
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_CS2_N;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_ENABLE;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_MSBF_OUT;
+-    _cntl0 |= BCM2835_AUX_SPI_CNTL0_CPHA_IN;
+-    _cntl0 |= 8; // Shift length.
++    uint32_t data = (bcm2835_peri_read(io) >> shiftRx) & 0xff;
++    if (spi1_mode == BCM2835_AUX_SPI_MODE_COMPATIBLE && spi1_bitOrder == BCM2835_AUX_SPI_MSBFIRST)
++        data = bcm2835_correct_order(data);
+ 
+-    uint32_t _cntl1 = BCM2835_AUX_SPI_CNTL1_MSBF_IN;
++    bcm2835_aux_spi_reset();
+ 
+-    bcm2835_peri_write(cntl1, _cntl1);
+-    bcm2835_peri_write(cntl0, _cntl0);
++    return data;
++}
+ 
+-    bcm2835_peri_write(io, (uint32_t) bcm2835_correct_order(value) << 24);
++/* Writes (and reads) 1 to 32 bits to AUX SPI - experimental */
++uint32_t bcm2835_aux_spi_transferbits(uint32_t value, uint8_t bits)
++{
++    if (bits < 1 || bits > 32)
++        return 0;
++
++    volatile uint32_t* stat = bcm2835_spi1 + BCM2835_AUX_SPI_STAT/4;
++    volatile uint32_t* io = bcm2835_spi1 + BCM2835_AUX_SPI_IO/4;
++    const int shiftTx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? 32-bits : 0;	// Tx fifo shift
++    const int shiftRx = (spi1_bitOrder==BCM2835_AUX_SPI_MSBFIRST) ? 0 : 32-bits;	// Rx fifo shift
++    const uint32_t mask = (bits<32) ? (1<<bits)-1 : 0xffffffff;
++
++    bcm2835_aux_spi_setup(bits);
++
++    bcm2835_peri_write(io, ((uint32_t)value & mask) << shiftTx);
+ 
+     while (bcm2835_peri_read(stat) & BCM2835_AUX_SPI_STAT_BUSY)
+         ;
+ 
+-    data = bcm2835_correct_order(bcm2835_peri_read(io) & 0xff);
++    uint32_t data = (bcm2835_peri_read(io) >> shiftRx) & mask;
+ 
+-    bcm2835_aux_spi_reset();
++    bcm2835_aux_spi_reset();		/* needed? */
+ 
+     return data;
+ }
+diff -Naur a/src/bcm2835.h b/src/bcm2835.h
+--- a/src/bcm2835.h	2020-04-15 14:39:01.000000000 -0700
++++ b/src/bcm2835.h	2020-04-20 12:21:57.000000000 -0700
+@@ -26,7 +26,7 @@
+   BCM 2835).
+   
+   The version of the package that this documentation refers to can be downloaded 
+-  from http://www.airspayce.com/mikem/bcm2835/bcm2835-1.64.tar.gz
++  from http://www.airspayce.com/mikem/bcm2835/bcm2835-1.66.tar.gz
+   You can find the latest version at http://www.airspayce.com/mikem/bcm2835
+   
+   Several example programs are provided.
+@@ -991,22 +991,26 @@
+ #define BCM2835_AUX_SPI_CNTL0_CS0_N     0x000C0000 /*!< CS 0 low */
+ #define BCM2835_AUX_SPI_CNTL0_CS1_N     0x000A0000 /*!< CS 1 low */
+ #define BCM2835_AUX_SPI_CNTL0_CS2_N 	0x00060000 /*!< CS 2 low */
++#define BCM2835_AUX_SPI_CNTL0_CS_NONE 	0x000E0000 /*!< no active CS */
+ 
+ #define BCM2835_AUX_SPI_CNTL0_POSTINPUT	0x00010000  /*!< */
+ #define BCM2835_AUX_SPI_CNTL0_VAR_CS	0x00008000  /*!< */
+ #define BCM2835_AUX_SPI_CNTL0_VAR_WIDTH	0x00004000  /*!< */
+-#define BCM2835_AUX_SPI_CNTL0_DOUTHOLD	0x00003000  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_DOUTHOLD0	0x00000000  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_DOUTHOLD1	0x00001000  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_DOUTHOLD4	0x00002000  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_DOUTHOLD	0x00003000  /*!< _DOUTHOLD7 */
+ #define BCM2835_AUX_SPI_CNTL0_ENABLE	0x00000800  /*!< */
+-#define BCM2835_AUX_SPI_CNTL0_CPHA_IN	0x00000400  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_CPHA_IN	0x00000400  /*!< _IN_RISING */
+ #define BCM2835_AUX_SPI_CNTL0_CLEARFIFO	0x00000200  /*!< */
+-#define BCM2835_AUX_SPI_CNTL0_CPHA_OUT	0x00000100  /*!< */
++#define BCM2835_AUX_SPI_CNTL0_CPHA_OUT	0x00000100  /*!< _OUT_RISING */
+ #define BCM2835_AUX_SPI_CNTL0_CPOL	0x00000080  /*!< */
+ #define BCM2835_AUX_SPI_CNTL0_MSBF_OUT	0x00000040  /*!< */
+ #define BCM2835_AUX_SPI_CNTL0_SHIFTLEN	0x0000003F  /*!< */
+ 
+ #define BCM2835_AUX_SPI_CNTL1_CSHIGH	0x00000700  /*!< */
+-#define BCM2835_AUX_SPI_CNTL1_IDLE	0x00000080  /*!< */
+-#define BCM2835_AUX_SPI_CNTL1_TXEMPTY	0x00000040  /*!< */
++#define BCM2835_AUX_SPI_CNTL1_TXEMPTY	0x00000080  /*!< */
++#define BCM2835_AUX_SPI_CNTL1_IDLE	0x00000040  /*!< */
+ #define BCM2835_AUX_SPI_CNTL1_MSBF_IN	0x00000002  /*!< */
+ #define BCM2835_AUX_SPI_CNTL1_KEEP_IN	0x00000001  /*!< */
+ 
+@@ -1019,6 +1023,49 @@
+ #define BCM2835_AUX_SPI_STAT_BUSY	0x00000040  /*!< */
+ #define BCM2835_AUX_SPI_STAT_BITCOUNT	0x0000003F  /*!< */
+ 
++/*! \brief bcm2835AUXSPIChipSelect AUX SPI Chip Select
++  Specify the AUX SPI chip select pin to be passed to bcm2835_aux_spi_prepare()
++*/
++typedef enum
++{
++    BCM2835_AUX_SPI_CS0 = 0,		/*!< Chip Select 0 */
++    BCM2835_AUX_SPI_CS1 = 1,		/*!< Chip Select 1 */
++    BCM2835_AUX_SPI_CS2 = 2,		/*!< Chip Select 2 */
++    BCM2835_AUX_SPI_CS_NONE = 3		/*!< No CS, control it yourself */
++} bcm2835AUXSPIChipSelect;
++
++/*! \brief bcm2835AUXSPIMode AUX SPI Data Mode
++  Specify the SPI data mode to be passed to bcm2835_aux_spi_prepare()
++*/
++typedef enum
++{
++    BCM2835_AUX_SPI_MODE0 = 0,		/*!< CPOL = 0, CPHA = 0 */
++    BCM2835_AUX_SPI_MODE1 = 1,		/*!< CPOL = 0, CPHA = 1 not supported */
++    BCM2835_AUX_SPI_MODE2 = 2,		/*!< CPOL = 1, CPHA = 0 */
++    BCM2835_AUX_SPI_MODE3 = 3,		/*!< CPOL = 1, CPHA = 1 not supported */
++    BCM2835_AUX_SPI_MODE_COMPATIBLE = 4	/*!< Backwards compatible AUX SPI mode */
++}bcm2835AUXSPIMode;
++
++/*! \brief bcm2835AUXSPIBitOrder AUX SPI Bit Order
++  Specifies the SPI data bit ordering to be passed to bcm2835_aux_spi_prepare()
++*/
++typedef enum
++{
++    BCM2835_AUX_SPI_LSBFIRST = 0,	/*!< LSB First */
++    BCM2835_AUX_SPI_MSBFIRST = 1	/*!< MSB First */
++}bcm2835AUXSPIBitOrder;
++
++/*! \brief bcm2835AUXSPIDoutHold AUX SPI DOUT Hold Time
++  Specify the AUX SPI DOUT hold time to be passed to bcm2835_aux_spi_prepare()
++*/
++typedef enum
++{
++    BCM2835_AUX_SPI_DOUTHOLD_0 = 0,	/*!< No extra hold time */
++    BCM2835_AUX_SPI_DOUTHOLD_1 = 1,	/*!< 1 system clock extra hold time */
++    BCM2835_AUX_SPI_DOUTHOLD_4 = 2,	/*!< 4 system clock extra hold time */
++    BCM2835_AUX_SPI_DOUTHOLD_7 = 3	/*!< 7 system clock extra hold time */
++} bcm2835AUXSPIDoutHold;
++
+ /* Defines for SPI
+    GPIO register offsets from BCM2835_SPI0_BASE. 
+    Offsets into the SPI Peripheral block in bytes per 10.5 SPI Register Map
+@@ -1067,7 +1114,7 @@
+     BCM2835_SPI_BIT_ORDER_MSBFIRST = 1   /*!< MSB First */
+ }bcm2835SPIBitOrder;
+ 
+-/*! \brief SPI Data mode
++/*! \brief bcm2835SPIMode SPI Data mode
+   Specify the SPI data mode to be passed to bcm2835_spi_setDataMode()
+ */
+ typedef enum
+@@ -1765,15 +1812,31 @@
+     */
+     extern void bcm2835_spi_write(uint16_t data);
+ 
++    /*! Controls which chip select pins are to be used for AUX SPI operations.
++      The default for backwards compatibility is that only CS2 is controlled if this
++      function is never called.  Calling this function does not immediately change the
++      state of the CS pins, they are setup when bcm2835_aux_spi_begin() is called and
++      they are released when bcm2835_aux_spi_end() is called.  It is acceptable for all
++      the arguments to be zero which implies the caller is controlling CS pins manually.
++      This function should be called before the first call to bcm2835_aux_spi_begin().
++      \param[in] cs0 Allow control the CS0 pin if non-zero
++      \param[in] cs1 Allow control the CS1 pin if non-zero
++      \param[in] cs2 Allow control the CS2 pin if non-zero
++      \sa bcm2835_aux_spi_begin() \sa bcm2835_aux_spi_end()
++    */
++    extern int bcm2835_aux_spi_useChipSelects(uint8_t cs0, uint8_t cs1, uint8_t cs2);
++
+     /*! Start AUX SPI operations.
+-      Forces RPi AUX SPI pins P1-38 (MOSI), P1-38 (MISO), P1-40 (CLK) and P1-36 (CE2)
++      Forces RPi AUX SPI pins P1-38 (MOSI), P1-35 (MISO), P1-40 (CLK) and P1-36 (CE2)
++      Also P1-11 (CE1) and P1-12 (CE0) are used if enabled by bcm2835_aux_spi_useChipSelects.
+       to alternate function ALT4, which enables those pins for SPI interface.
+       \return 1 if successful, 0 otherwise (perhaps because you are not running as root)
+     */
+     extern int bcm2835_aux_spi_begin(void);
+ 
+     /*! End AUX SPI operations.
+-       SPI1 pins P1-38 (MOSI), P1-38 (MISO), P1-40 (CLK) and P1-36 (CE2)
++       SPI1 pins P1-38 (MOSI), P1-35 (MISO), P1-40 (CLK) and P1-36 (CE2)
++       (and P1-11 (CE1) and P1-12 (CE0) if enabled by bcm2835_aux_spi_useChipSelects)
+        are returned to their default INPUT behaviour.
+      */
+     extern void bcm2835_aux_spi_end(void);
+@@ -1790,10 +1853,28 @@
+      */
+     extern uint16_t bcm2835_aux_spi_CalcClockDivider(uint32_t speed_hz);
+ 
++    /*! Prepares the AUX SPI bus for subsequent data transfers.
++      When any AUX SPI transfer is made, the arguments passed in this function will be used
++      to control the transfer's chip select, speed, mode, bit order, and DOUT hold time.
++      The AUX SPI native chip select pins are active-low only.
++      The cs argument can be set to BCM2835_AUX_SPI_CS_NONE if the caller is controlling
++      the chip select manually.
++      For the mode argument, only modes 0 and 2 are correctly supported by the AUX SPI hardware,
++      requesting mode 1 or 3 is ignored.  The mode argument can be set to BCM2835_AUX_SPI_MODE_COMPATIBLE
++      which is basically SPI mode 0, but the transfers use the "original" code without some recent updates
++      from the kernel driver.  In compatibility mode, bitorder should be set to BCM2835_AUX_SPI_MSBFIRST.
++      \param[in] cs Specifies the CS pin that is used to activate the desired slave.
++      \param[in] speed_hz Specifies the SPI transfer speed, in Hz.
++      \param[in] mode Specifies the SPI mode (mode 0, 2, or backwards compatibility).
++      \param[in] bitorder Specifies the bit order of the SPI transfer (MSB first or LSB first).
++      \param[in] douthold Specifies the DOUT hold time, in system clock units.
++      see \ref bcm2835AUXSPIChipSelect \ref bcm2835AUXSPIMode \ref bcm2835AUXSPIBitOrder \ref bcm2835AUXSPIDoutHold
++    */
++    extern void bcm2835_aux_spi_prepare(uint8_t cs, uint32_t speed_hz, uint8_t mode, uint8_t bitorder, uint8_t douthold);
++
+     /*! Transfers half-word to the AUX SPI slave.
+       Asserts the currently selected CS pins during the transfer.
+-      \param[in] data The 8 bit data byte to write to MOSI
+-      \return The 16 bit byte simultaneously read from  MISO
++      \param[in] data The 16 bit data byte to write to MOSI
+       \sa bcm2835_spi_transfern()
+     */
+     extern void bcm2835_aux_spi_write(uint16_t data);
+@@ -1832,7 +1913,18 @@
+       \sa bcm2835_aux_spi_transfern()
+     */
+     extern uint8_t bcm2835_aux_spi_transfer(uint8_t value);
+-    
++
++    /*! Transfers 1 to 32 bits to and from the AUX SPI slave - experimental.
++      Clocks the n-bit value out on MOSI, and simultaneously clocks in data from MISO.
++      The n-bits are the least significant bits of the passed value and the return value.
++      Returns the read data bits from the slave.
++      \param[in] value The n-bit data to write to MOSI
++      \param[in] bits Number of bits to write/read
++      \return The n-bit value simultaneously read from MISO
++      \sa bcm2835_aux_spi_transfer()
++    */
++    extern uint32_t bcm2835_aux_spi_transferbits(uint32_t value, uint8_t bits);
++
+     /*! @} */
+ 
+     /*! \defgroup i2c I2C access
