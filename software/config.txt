@@ -59,7 +59,10 @@ dtoverlay=spi1-2cs
 #dtoverlay=
 gpio=12,13=a0
 dtparam=audio=on
-
+audio_pwm_mode=2
+dtoverlay=audremap,pins_12_13
+disable_audio_dither=1
+#enable_audio_dither=1
 
 [pi4]
 # Enable DRM VC4 V3D driver on top of the dispmanx display stack

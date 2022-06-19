@@ -16,6 +16,6 @@ _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
-sudo /home/pi/scripts/fbcp-ili9341 &
-sudo /home/pi/scripts/main &
+sudo /home/pi/fbcp-ili9341/build/fbcp-ili9341 &
+sudo /home/pi/radio/main &
 exit 0
