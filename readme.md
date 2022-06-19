@@ -27,11 +27,12 @@ Not only that, it's as big as your phone, with only 12mm thickness. Two joystick
 * dimensions 154x68x12mm (with case)
 * two joysticks with 10 bit ADC MCP3008
 * PAM8403 amplifier, mono speaker and stereo headphones
-* NRF24L01 radio withuut PA+LNA
+* NRF24L01 radio without PA+LNA
 # Kits
 There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki).
 # Updates
 I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project. You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)!
+EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 
 # UPCOMING CHANGES FOR NEW VERSION:  
 * add test pads  
