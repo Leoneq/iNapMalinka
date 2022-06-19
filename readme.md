@@ -31,7 +31,7 @@ Not only that, it's as big as your phone, with only 12mm thickness. Two joystick
 # Kits
 There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki).
 # Updates
-I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project. You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)!
+I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project. You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)! All donations go straaaaight into Malinka v2!!
 EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 
 # UPCOMING CHANGES FOR NEW VERSION:  
