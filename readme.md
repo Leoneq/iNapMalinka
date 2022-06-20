@@ -1,7 +1,10 @@
 ![IMG20220618163426 - Copy](https://user-images.githubusercontent.com/36605644/174472050-c643f2aa-f4e9-433c-a007-6438bcb5a908.jpg)
 
 # Welcome to the iNap Malinka main page!
-Here you'll find everything about the project.
+Here you'll find everything about the project, IT'S STILL UNDER MAINTENANCE! The project **isn't finished yet** and important changes will occur soon.
+Consider buying me a coffee so I can work faster!!
+
+<a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
 ## What's iNap Malinka?
 This is one amongst many Pi handhelds, that allow you to not only play games, but also make a very flexible HMI suitable for any application - besides of WiFi and Bluetooth, it also offers NRF24L01 for connectivity. That means, any Arduino or Pi project using NRF24L01 can be steered with this little thing!
@@ -31,10 +34,11 @@ Not only that, it's as big as your phone, with only 12mm thickness. Two joystick
 # Kits
 There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki).
 # Updates
-I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project. You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)! All donations go straaaaight into Malinka v2!!
+I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project.  
+You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)!  
 EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 
-# UPCOMING CHANGES FOR NEW VERSION:  
+# UPCOMING CHANGES FOR THE NEW VERSION:  
 * add test pads  
 * change layout so touch connector is in place  
 * change cutout so triggers can be printed w/o supports  
@@ -42,16 +46,16 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * move to eagle instead of easyeda
 * change normal nrf to version with pa+lna
 * add a soundcard via i2s (?)
-* make it symmetric (?)
+* make layout  symmetric (?)
 * instead of using cutout, make a huge pad for screen cable
 * move the pi so it doesn't need to be cut
 * if you have more ideas, contact me!
 
-I'd recommend to wait for the new version.
+Again, I strongly recommend to wait for the new board version. In the current one not everything works.
 
 ### License
 Licensed under GNU GPL v3 - that means, you can share, contribute, modify the source as much as you want!
-Please remember to mention the original author though.
+Please remember to mention the original author though. Good luck!!
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
