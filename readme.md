@@ -55,6 +55,8 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * speaker enclosures 
 * usb c charging + differential route thing
 * consider cm4 instead of zero2w
+* make a border in the case for matching
+* make decent, two part holes
 * if you have more ideas, contact me!
 
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
