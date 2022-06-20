@@ -2,7 +2,7 @@
 
 # Welcome to the iNap Malinka main page!
 Here you'll find everything about the project, IT'S STILL UNDER MAINTENANCE! The project **isn't finished yet** and important changes will occur soon.
-Consider buying me a coffee so I can work faster!!
+Consider donating me so I can order all needed parts faster!!
 
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
