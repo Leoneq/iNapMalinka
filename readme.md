@@ -53,6 +53,8 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * test parallel connection
 * stereo sound output
 * speaker enclosures 
+* usb c charging + differential route thing
+* consider cm4 instead of zero2w
 * if you have more ideas, contact me!
 
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
