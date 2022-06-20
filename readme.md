@@ -46,9 +46,13 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * move to eagle instead of easyeda
 * change normal nrf to version with pa+lna
 * add a soundcard via i2s (?)
-* make layout  symmetric (?)
+* make layout symmetric (?)
 * instead of using cutout, make a huge pad for screen cable
 * move the pi so it doesn't need to be cut
+* remodel buttons as needed (guides, holes, flat shape)
+* test parallel connection
+* stereo sound output
+* speaker enclosures 
 * if you have more ideas, contact me!
 
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
