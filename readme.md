@@ -58,8 +58,8 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
 
 ### License
-Licensed under GNU GPL v3 - that means, you can share, contribute, modify the source as much as you want!
-Please remember to mention the original author though. Good luck!!
+Licensed under CC BY-NC-SA 3.0 - that means you can share, contribute, modify and remix the source as much as you want!
+Please remember to mention the original author and dont change the licence. If you want to use it commercially, contact me. Good luck!!
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
