@@ -58,6 +58,8 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * make a border in the case for matching
 * make decent, two part holes
 * isolate audio power from the board
+* make an automated install script
+* also an os image would be nice
 * if you have more ideas, contact me!
 
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
