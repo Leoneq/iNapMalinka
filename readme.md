@@ -55,8 +55,8 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * ✔️ test parallel connection - useless, we stay with spi
 * ✔️ stereo sound output
 * speaker enclosures 
-* ✔️ usb c charging + differential route thing
-* ❌ consider cm4 instead of zero2w - cm4 is overkill for this device
+* ✔️ usb c charging
+* ❌ consider cm4 instead of zero2w - cm4 is an overkill for this
 * make a border in the case for matching
 * make decent, two part holes in the case
 * isolate audio power from the board
