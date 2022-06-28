@@ -40,16 +40,16 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 
 # UPCOMING CHANGES FOR THE NEW VERSION:  
 * ✔️ add test pads  
-* change layout so touch connector is in place  
-* change cutout so triggers can be printed w/o supports  
+* ✔️ change layout so touch connector is in place  
+* ✔️ change cutout so triggers can be printed w/o supports  
 * ✔️ change power switch to smd one, and re-route battery charger
 * ❌ <s>move to eagle instead of easyeda</s> fuck new eagle they broke it so much 
 * ✔️ change normal nrf to version with pa+lna
 * ❌ add a soundcard via i2s (cannot have spi1 and i2s at once)
 * ✔️ or improve pwm soundcard
-* make layout symmetric (?)
-* instead of using cutout, make a huge pad for screen cable
-* move the pi so it doesn't need to be cut
+* ✔️ make layout symmetric (?)
+* ✔️ instead of using cutout, make a huge pad for screen cable
+* ❌ move the pi so it doesn't need to be cut: +10mm length or a cut pi.
 * remodel buttons as needed (guides, holes, flat shape)
 * ✔️ merge usb user with usb charge into one usb c
 * ✔️ test parallel connection - useless, we stay with spi
@@ -58,8 +58,7 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * ✔️ usb c charging
 * ❌ consider cm4 instead of zero2w - cm4 is an overkill for this
 * make a border in the case for matching
-* make decent, two part holes in the case
-* isolate audio power from the board
+* ✔️ isolate audio power from the board
 * make an automated install script
 * also an os image would be nice
 * ✔️ fix battery voltage divider
