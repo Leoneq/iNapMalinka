@@ -54,7 +54,7 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * ✔️ merge usb user with usb charge into one usb c
 * ✔️ test parallel connection - useless, we stay with spi
 * ✔️ stereo sound output
-* speaker enclosures 
+* ✔️ speaker enclosures 
 * ✔️ usb c charging
 * ❌ consider cm4 instead of zero2w - cm4 is an overkill for this
 * make a border in the case for matching
