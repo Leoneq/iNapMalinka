@@ -50,14 +50,14 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 * ✔️ make layout symmetric (?)
 * ✔️ instead of using cutout, make a huge pad for screen cable
 * ❌ move the pi so it doesn't need to be cut: +10mm length or a cut pi.
-* remodel buttons as needed (guides, holes, flat shape)
+* ✔️ remodel buttons as needed (guides, holes, flat shape)
 * ✔️ merge usb user with usb charge into one usb c
 * ✔️ test parallel connection - useless, we stay with spi
 * ✔️ stereo sound output
 * ✔️ speaker enclosures 
 * ✔️ usb c charging
 * ❌ consider cm4 instead of zero2w - cm4 is an overkill for this
-* make a border in the case for matching
+* ✔️ make a border in the case for matching
 * ✔️ isolate audio power from the board
 * make an automated install script
 * also an os image would be nice
