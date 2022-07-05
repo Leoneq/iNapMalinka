@@ -71,6 +71,13 @@ EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
 
 Again, I strongly recommend to wait for the new board version. In the current one not everything works.
 
+# Find the project elsewhere
+* [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
+* instructables: not yet!
+* fusion viewer: not yet!
+* thingiverse: not yet!
+* hackaday: not yet!
+
 ### License
 Licensed under CC BY-NC-SA 4.0 - that means you can share, contribute, modify and remix the source as much as you want!
 Please remember to mention the original author and dont change the licence. If you want to use it commercially, contact me. 
