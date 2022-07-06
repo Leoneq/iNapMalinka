@@ -53,7 +53,7 @@ Remember that anything you do is on your own risk - the author **is not** respon
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
-This project uses code from following repositories:
+This project uses code from following repositories, under their licenses:
 * [fbcp-ili9341](https://github.com/juj/fbcp-ili9341)
 * [RetroPie](https://retropie.org.uk)
 * [bcm2835 C library](http://www.airspayce.com/mikem/bcm2835/)
