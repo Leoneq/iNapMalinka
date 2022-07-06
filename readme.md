@@ -43,7 +43,7 @@ There aren't any kits at the moment, and probably there won't be any. You'll nee
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
-* [Thingiverse[(https://www.thingiverse.com/thing:5426649) for 3D models
+* [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!
 
 ### License
