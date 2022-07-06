@@ -42,10 +42,9 @@ There aren't any kits at the moment, and probably there won't be any. You'll nee
 # Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
+* [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
+* [Thingiverse[(https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!
-* fusion viewer: not yet!
-* thingiverse: not yet!
-* hackaday: not yet!
 
 ### License
 Licensed under CC BY-NC-SA 4.0 - that means you can share, contribute, modify and remix the source as much as you want!
@@ -53,6 +52,12 @@ Please remember to mention the original author and dont change the licence. If y
 Remember that anything you do is on your own risk - the author **is not** responsible for anything you do. Good luck!!  
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+
+This project uses code from following repositories, under their respective licenses:
+* [fbcp-ili9341](https://github.com/juj/fbcp-ili9341)
+* [RetroPie](https://retropie.org.uk)
+* [bcm2835 C library](http://www.airspayce.com/mikem/bcm2835/)
+
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
