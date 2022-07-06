@@ -37,38 +37,11 @@ But, if you're just interested about gaming, you can totally ignore the radio se
 * NRF24L01 PA+LNA radio with optional, external antenna
 * Micro-USB for peripherals and USB-C for charging
 # Kits
-There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki).
-# Updates
-I'm going to update the project as needed, although more significant changes will go to Malinka v2 - stay tuned. You can follow me on [my twitter](https://twitter.com/leoneq112) for small updates on the project.  
-You can also consider supporting me on my [kofi page](https://ko-fi.com/leoneq)!  
-EasyEDA project: [link](https://oshwlab.com/leoneq/konsola)
-
-# Improvements since the last version:
-* ✔️ add test pads  
-* ✔️ change layout so touch connector is in place  
-* ✔️ change cutout so triggers can be printed w/o supports  
-* ✔️ change power switch to smd one, and re-route battery charger
-* ✔️ change normal nrf to version with pa+lna
-* ✔️ or improve pwm soundcard
-* ✔️ make layout symmetric (?)
-* ✔️ instead of using cutout, make a huge pad for screen cable
-* ✔️ move the pi so it doesn't need to be cut
-* ✔️ remodel buttons as needed (guides, holes, flat shape)
-* ✔️ merge usb user with usb charge into one usb c
-* ✔️ test parallel connection - useless, we stay with spi
-* ✔️ stereo sound output
-* ✔️ speaker enclosures 
-* ✔️ usb c charging
-* ✔️ make a border in the case for matching
-* ✔️ isolate audio power from the board
-* ❌ <s>move to eagle instead of easyeda</s> fuck new eagle they broke it so much 
-* ❌ consider cm4 instead of zero2w - cm4 is an overkill for this
-* ❌ add a soundcard via i2s (cannot have spi1 and i2s at once)
-* make an automated install script
-* also an os image would be nice
+There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
 
 # Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
+* [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * instructables: not yet!
 * fusion viewer: not yet!
 * thingiverse: not yet!
