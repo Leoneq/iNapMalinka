@@ -1,10 +1,10 @@
 ![IMG20220618163426 - Copy](https://user-images.githubusercontent.com/36605644/174472050-c643f2aa-f4e9-433c-a007-6438bcb5a908.jpg)
 
 # Welcome to the iNap Malinka main page!
-Here you'll find everything about the project. Remember that it's still work in progress, so be prepared for changes!
-Consider donating me so I can order buy more milk:
+Here you'll find everything about the project. Remember that it's still a work in progress!
+Consider donating me a cup of milk:
 
-<a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+<a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
 
 ## What's iNap Malinka?
 It was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this. It's based on RetroPie so any retro game, including ports, can be played on this. But as it's mostly a device for tinkering on-the-go, there's additional USB for any kind of peripheral, HDMI port, and a decent audio section to work as a little function generator.
@@ -19,25 +19,27 @@ But, if you're just interested about gaming, you can totally ignore the radio se
 * only 3 external ICs, without any aux microcontroller
 * stereo sound output and a headphone jack
 * with a keyboard, it can act as a little PC
-* uses parts of Nintendo Switch
+* uses parts from Nintendo Switch
 ## Why NOT?
 * if you're a fan of Steam Deck, this device is probably too small for you
 * lack of joystick pushbuttons as well as analog triggers
-* many tools needed to assembly, including a 3D printer
+* many tools are needed to assembly
 * intermediate soldering skills are needed
-* uses parts of Nintendo Switch
+* uses parts from Nintendo Switch
 
 ## Specifications
-* 3.5" 480x320 ILI9488 screen with FT6206 capacitive touch controller
-* Raspberry Pi Zero 2W with possible OC
+* 3.5" 480x320 ILI9488 screen with FT6236 capacitive touch controller
+* Raspberry Pi Zero 2W
 * 1500mAh lipo battery
 * 160x70x12mm (with case)
 * two joysticks with 10 bit ADC MCP3008
 * PAM8403 amplifier, stereo
-* NRF24L01 PA+LNA radio with optional, external antenna
+* NRF24L01 PA+LNA radio with external antenna
 * Micro-USB for peripherals and USB-C for charging
+
 # Kits
-There aren't any kits at the moment, and probably there won't be any. You'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
+There aren't any kits at the moment, you'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
+If you want to sell kits of Malinka, please contact me.
 
 # Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
@@ -57,7 +59,7 @@ This project uses code from following repositories, under their respective licen
 * [fbcp-ili9341](https://github.com/juj/fbcp-ili9341)
 * [RetroPie](https://retropie.org.uk)
 * [bcm2835 C library](http://www.airspayce.com/mikem/bcm2835/)
-
+Because of latter one, this means that the code (and only the code) and is licensed under GNU GPL v3.0 (everything else is under CC BY-NC-SA 4.0!)
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
