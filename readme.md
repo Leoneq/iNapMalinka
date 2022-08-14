@@ -7,16 +7,17 @@ Consider donating me a cup of milk:
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
 
 ## What's iNap Malinka?
-It was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this. It's based on RetroPie so any retro game, including ports, can be played on this. But as it's mostly a device for tinkering on-the-go, there's additional USB for any kind of peripheral, HDMI port, and a decent audio section to work as a little function generator.
-Not only that, it's as big as your phone, with only 12mm thickness. Two joysticks, 3.5" capacitive touch screen, powered by Raspberry Pi Zero 2W.  
-But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld.
+It was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this. You can install RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's additional USB for any kind of peripheral, HDMI port, and a decent audio section too.
+Not only that, it's just as big as your phone, with only 12mm thickness. Two joysticks, 3.5" capacitive touch screen, powered by Raspberry Pi Zero 2W.  
+But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
+You can use it as a mobile HMI too, as besides of NRF24L01 you can use WiFi and Bluetooth.
 
 ## Why Malinka?
 * extremely small size compared to other pi handhelds
 * big, colorful LCD with touch!
 * two joysticks allowing to play more modern games
 * NRF24L01 radio makes it a perfect remote!!
-* only 3 external ICs, without any aux microcontroller
+* only 3 external ICs, **without** any aux microcontroller
 * stereo sound output and a headphone jack
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
