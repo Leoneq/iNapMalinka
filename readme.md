@@ -56,11 +56,7 @@ Remember that anything you do is on your own risk - the author **is not** respon
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
-This project uses code from following repositories, under their respective licenses:
-* [fbcp-ili9341](https://github.com/juj/fbcp-ili9341)
-* [RetroPie](https://retropie.org.uk)
-* [bcm2835 C library](http://www.airspayce.com/mikem/bcm2835/)
-Because of latter one, this means that the code (and only the code) and is licensed under GNU GPL v3.0 (everything else is under CC BY-NC-SA 4.0!)
+Because of license issues, the code has been moved to [iNapMalinka-code](https://github.com/Leoneq/iNapMalinka-code)!
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
