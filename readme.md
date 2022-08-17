@@ -1,7 +1,7 @@
 ![IMG20220618163426 - Copy](https://user-images.githubusercontent.com/36605644/174472050-c643f2aa-f4e9-433c-a007-6438bcb5a908.jpg)
 
 # Welcome to the iNap Malinka main page!
-Here you'll find everything about the project. Remember that it's still a work in progress!
+Here you'll find everything about the project. Remember that it's still a work in progress! <s>despite spending my entire vacation on this project</s>
 Consider donating me a cup of milk:
 
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
