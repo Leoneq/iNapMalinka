@@ -42,6 +42,14 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 There aren't any kits at the moment, you'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
 If you want to sell kits of Malinka, please contact me.
 
+# To-do
+* range test video
+* sans gaming video
+* doom gaming video
+* radio demo video
+* improve software a little bit
+* and finish wiki ofc
+
 # Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
