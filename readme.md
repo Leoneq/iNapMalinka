@@ -8,7 +8,7 @@ Not only that, it's just as big as your phone, with only 12mm thickness. Two joy
 But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
 Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetooth to control your devices!!
 
-## Why Malinka?
+# Why Malinka?
 * extremely small size compared to other pi handhelds
 * big, colorful LCD with touch!
 * two joysticks allowing to play more modern games
@@ -17,14 +17,14 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * stereo sound output and a headphone jack
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
-## Why NOT?
+# Why NOT?
 * if you're a fan of Steam Deck, this device is probably too small for you
 * lack of joystick pushbuttons as well as analog triggers
 * many tools are needed to assembly
 * intermediate soldering skills are needed
 * uses parts from Nintendo Switch
 
-## 🚀 Features
+# 🚀 Features
 * 3.5" 480x320 ILI9488 screen with FT6236 capacitive touch controller
 * Raspberry Pi Zero 2W
 * 1500mAh lipo battery
@@ -34,11 +34,11 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * NRF24L01 PA+LNA radio with external antenna
 * Micro-USB for peripherals and USB-C for charging
 
-# 🔨 Kits
+## 🔨 Kits
 There aren't any kits at the moment, you'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
 If you want to sell kits of Malinka, please contact me.
 
-# To-do
+## ✏ To-do
 * range test video
 * sans gaming video
 * doom gaming video
@@ -46,7 +46,7 @@ If you want to sell kits of Malinka, please contact me.
 * improve software a little bit
 * and finish wiki ofc
 
-# 😎 Find the project elsewhere
+## 😎 Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
