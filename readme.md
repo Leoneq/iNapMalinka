@@ -1,11 +1,9 @@
-![IMG20220618163426 - Copy](https://user-images.githubusercontent.com/36605644/174472050-c643f2aa-f4e9-433c-a007-6438bcb5a908.jpg)
-
 <div align="center">
-# ✨ Welcome to the iNap Malinka main page! ✨
-Here you'll find everything about the project. Remember that it's still a work in progress!
+  <img src="https://user-images.githubusercontent.com/36605644/185479882-3f159760-69f4-414f-b894-ccd0c23577fd.png" width=80%>
+  <h1>✨ Welcome to the iNap Malinka main page! ✨</h1>
 </div>
-## What's iNap Malinka?
-It was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this. You can install RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's additional USB for any kind of peripheral, HDMI port, and a decent audio section too.
+
+**iNap Malinka** was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this as well! You can install RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's additional USB for any kind of peripheral, HDMI port, and a decent audio section too.
 Not only that, it's just as big as your phone, with only 12mm thickness. Two joysticks, 3.5" capacitive touch screen, powered by Raspberry Pi Zero 2W.  
 But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
 Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetooth to control your devices!!
@@ -36,7 +34,7 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * NRF24L01 PA+LNA radio with external antenna
 * Micro-USB for peripherals and USB-C for charging
 
-# Kits
+# 🔨 Kits
 There aren't any kits at the moment, you'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
 If you want to sell kits of Malinka, please contact me.
 
@@ -48,14 +46,14 @@ If you want to sell kits of Malinka, please contact me.
 * improve software a little bit
 * and finish wiki ofc
 
-# Find the project elsewhere
+# 😎 Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
 * [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!
 
-### License
+## 🤝 License
 Licensed under CC BY-NC-SA 4.0 - that means you can share, contribute, modify and remix the source as much as you want!
 Please remember to mention the original author and dont change the licence. If you want to use it commercially, contact me. 
 Remember that anything you do is on your own risk - the author **is not** responsible for anything you do. Good luck!!  
@@ -64,7 +62,7 @@ Remember that anything you do is on your own risk - the author **is not** respon
 
 Because of license issues, the code has been moved to [iNapMalinka-code](https://github.com/Leoneq/iNapMalinka-code)!  
 
-### ❤️ Sponsor
+## ❤️ Sponsor
 If you liked this project consider buying me a cup of milk:
 
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
