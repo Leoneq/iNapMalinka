@@ -9,7 +9,7 @@ But, if you're just interested about gaming, you can totally ignore the radio se
 Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetooth to control your devices!!
 
 # Why Malinka?
-* extremely small size compared to other pi handhelds
+* small and compact size
 * big, colorful LCD with touch!
 * two joysticks allowing to play more modern games
 * NRF24L01 radio makes it a perfect remote!!
@@ -51,7 +51,7 @@ If you want to sell kits of Malinka, please contact me.
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
 * [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
-* instructables: not yet!
+* instructables: not yet!  
 If the project becomes quite popular, I may create a discord server or subreddit dedicated to Malinka!
 
 ## 🤝 License
