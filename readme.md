@@ -8,7 +8,7 @@ Not only that, it's just as big as your phone, with only 12mm thickness. Two joy
 But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
 Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetooth to control your devices!!
 
-# Why Malinka?
+# ❤ Why Malinka?
 * small and compact size
 * big, colorful LCD with touch!
 * two joysticks allowing to play more modern games
@@ -17,7 +17,7 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * stereo sound output and a headphone jack
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
-# Why NOT?
+# 💔 Why NOT?
 * if you're a fan of Steam Deck, this device is probably too small for you
 * lack of joystick pushbuttons as well as analog triggers
 * many tools are needed to assembly
@@ -31,7 +31,7 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * 160x70x12mm (with case)
 * two joysticks with 10 bit ADC MCP3008
 * PAM8403 amplifier, stereo
-* NRF24L01 PA+LNA radio with external antenna
+* NRF24L01 PA+LNA radio with external antenna (optional)
 * Micro-USB for peripherals and USB-C for charging
 
 ## 🔨 Kits
@@ -52,6 +52,7 @@ If you want to sell kits of Malinka, please contact me.
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
 * [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!  
+
 If the project becomes quite popular, I may create a discord server or subreddit dedicated to Malinka!
 
 ## 🤝 License
@@ -63,7 +64,7 @@ Remember that anything you do is on your own risk - the author **is not** respon
 
 Because of license issues, the code has been moved to [iNapMalinka-code](https://github.com/Leoneq/iNapMalinka-code)!  
 
-## ❤️ Sponsor
+## 💖 Sponsor
 If you liked this project consider buying me a cup of milk:
 
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
