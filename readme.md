@@ -52,6 +52,7 @@ If you want to sell kits of Malinka, please contact me.
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
 * [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!
+If the project becomes quite popular, I may create a discord server or subreddit dedicated to Malinka!
 
 ## 🤝 License
 Licensed under CC BY-NC-SA 4.0 - that means you can share, contribute, modify and remix the source as much as you want!
