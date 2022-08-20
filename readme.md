@@ -69,7 +69,7 @@ If you liked this project consider buying me a cup of milk:
 
 <a href='https://ko-fi.com/V7V2B5527' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a milk cup at ko-fi.com' /></a>
 
-I also want to thank [Leo the Leon](https://github.com/leo-the-leon) and [TheTrueShadowFox](https://github.com/TheTrueShadowFox) for help with this project!!
+I also want to thank [Leo the Leon](https://github.com/leo-the-leon) and [TheTrueShadowFox](https://github.com/TheTrueShadowFox) for the help with this project!!
 
 made with ❤ and 🥛 by  
 [@leonek112](https://twitter.com/leoneq112)
