@@ -15,6 +15,7 @@ Formally it's a mobile HMI, as besides of NRF24L01 you can use WiFi and Bluetoot
 * NRF24L01 radio makes it a perfect remote!!
 * only 3 external ICs, **without** any aux microcontroller
 * stereo sound output and a headphone jack
+* custom overlay
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
 # 💔 Why NOT?
