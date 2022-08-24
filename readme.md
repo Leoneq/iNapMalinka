@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/36605644/185479882-3f159760-69f4-414f-b894-ccd0c23577fd.png" width=80%>
+  <img src="https://user-images.githubusercontent.com/36605644/186421197-38b28a8d-5e08-4fb6-909e-2cd580bfd80f.png" width=80%>
   <h1>✨ Welcome to the iNap Malinka main page! ✨</h1>
 </div>
 
