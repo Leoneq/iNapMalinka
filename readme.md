@@ -18,7 +18,7 @@ Formally it's a mobile HMI, as besides the NRF24L01 you can use WiFi and Bluetoo
 * custom overlay
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
-* 
+
 # 💔 Why NOT?
 * if you're a fan of Steam Deck, this device is probably too small for you
 * lack of joystick pushbuttons as well as analog triggers
