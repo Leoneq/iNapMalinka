@@ -5,10 +5,10 @@
   <h1>✨ Welcome to the iNap Malinka main page! ✨</h1>
 </div>
 
-**iNap Malinka** was mostly made as a decent Raspberry based NRF24L01 transmitter, but as it turns out you can play some games on this as well! You can install RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's an additional USB for any kind of peripheral, an HDMI port, and a decent audio section too.
+**iNap Malinka** was mostly made as a decent Raspberry Pi based NRF24L01 transmitter. But as it turns out you can play some games on this as well! It's a small DIY handheld that runs RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's an additional USB for any kind of peripheral, an HDMI port, and a decent audio section too.
 Not only that, it's just as big as your phone, with only 12mm thickness. Two joysticks, 3.5" capacitive touch screen, powered by Raspberry Pi Zero 2W.  
-But, if you're just interested about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
-Formally it's a mobile HMI, as besides the NRF24L01 you can use WiFi and Bluetooth to control your devices!!
+But, if you're interested just about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
+Formally it's a mobile Human-Machine Interface (HMI), as besides the NRF24L01 you can use WiFi and Bluetooth to control your devices!!
 
 # ❤ Why Malinka?
 * small and compact size
