@@ -1,5 +1,7 @@
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/36605644/186421197-38b28a8d-5e08-4fb6-909e-2cd580bfd80f.png" width=80%>
+  <!--<img src="https://user-images.githubusercontent.com/36605644/186421197-38b28a8d-5e08-4fb6-909e-2cd580bfd80f.png" width=50%>
+  <img src="https://user-images.githubusercontent.com/36605644/186671484-4449b216-6cbb-4c44-be21-de949b300e96.jpg" width=50%>-->
+  <img src="https://user-images.githubusercontent.com/36605644/186671744-dc88d330-b454-46e5-a834-e3126cef4266.jpg" width=80%>
   <h1>✨ Welcome to the iNap Malinka main page! ✨</h1>
 </div>
 
