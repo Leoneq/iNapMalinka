@@ -5,12 +5,12 @@
   <h1>✨ Welcome to the iNap Malinka main page! ✨</h1>
 </div>
 
-**iNap Malinka** was mostly made as a decent Raspberry Pi based NRF24L01 transmitter. But as it turns out you can play some games on this as well! It's a small DIY handheld that runs RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's an additional USB for any kind of peripheral, an HDMI port, and a decent audio section too.
+**iNap Malinka** was mostly made as a decent Raspberry Pi based NRF24L01 transmitter. But as it turns out you can play some games on it as well! It's a small DIY handheld that runs RetroPie so any retro game, including ports, can be played on Malinka. But as it's mostly a device for tinkering on-the-go, there's an additional USB for any kind of peripheral, an HDMI port, and a decent audio section too.
 Not only that, it's just as big as your phone, with only 12mm thickness. Two joysticks, 3.5" capacitive touch screen, powered by Raspberry Pi Zero 2W.  
 But, if you're interested just about gaming, you can totally ignore the radio section and use it as a small, DIY handheld!
 Formally it's a mobile Human-Machine Interface (HMI), as besides the NRF24L01 you can use WiFi and Bluetooth to control your devices!!
 
-# ❤ Why Malinka?
+## ❤ Why Malinka?
 * small and compact size
 * big, colorful LCD with touch!
 * two joysticks allowing more modern games to be played
@@ -21,14 +21,14 @@ Formally it's a mobile Human-Machine Interface (HMI), as besides the NRF24L01 yo
 * with a keyboard, it can act as a little PC
 * uses parts from Nintendo Switch
 
-# 💔 Why NOT?
+## 💔 Why NOT?
 * if you're a fan of Steam Deck, this device is probably too small for you
 * lack of joystick pushbuttons as well as analog triggers
 * many tools are needed for assembly
 * intermediate soldering skills are needed
 * uses parts from Nintendo Switch
 
-# 🚀 Features
+## 🚀 Features
 * 3.5" 480x320 ILI9488 screen with FT6236 capacitive touch controller
 * Raspberry Pi Zero 2W
 * 1500mAh lipo battery
@@ -54,8 +54,9 @@ If you want to sell kits of Malinka, please contact me.
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
-* [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models
 * instructables: not yet!  
+* [Printables](https://www.printables.com/pl/model/265907) for 3D models
+* [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models but ew
 
 If the project becomes quite popular, I may create a discord server or subreddit dedicated to Malinka!
 
