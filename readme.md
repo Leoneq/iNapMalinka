@@ -52,7 +52,7 @@ If you want to sell kits of Malinka, please contact me.
 
 ## 😎 Find the project elsewhere
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
-* [GitHub](https://https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
+* [GitHub](https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
 * instructables: not yet!  
 * [Printables](https://www.printables.com/pl/model/265907) for 3D models
