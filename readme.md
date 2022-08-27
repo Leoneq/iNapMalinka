@@ -54,7 +54,8 @@ If you want to sell kits of Malinka, please contact me.
 * [OSHWLab](https://oshwlab.com/leoneq/konsola) for schematics and PCB source
 * [GitHub](https://github.com/Leoneq/iNapMalinka) for wiki and hardware source
 * [Hackaday](https://hackaday.io/project/186233-inap-malinka) for fun
-* instructables: not yet!  
+* [Hacksterio](https://www.hackster.io/leonek/inap-malinka-1ea718) for even more fun!!
+* [Instructables](https://www.instructables.com/INap-Malinka-Your-NRF24L01-Transmitter-That-Can-Pl/) for the assembly guide
 * [Printables](https://www.printables.com/pl/model/265907) for 3D models
 * [Thingiverse](https://www.thingiverse.com/thing:5426649) for 3D models but ew
 
