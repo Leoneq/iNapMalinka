@@ -63,7 +63,8 @@ If the project becomes quite popular, I may create a discord server or subreddit
 ## 🤝 License
 Licensed under CC BY-NC-SA 4.0 - that means you can share, contribute, modify, and remix the source as much as you want!
 Please remember to mention the original author and dont change the license. If you want to use it commercially, contact me. 
-Remember that anything you do is on your own risk - the author **is not** responsible for anything you do. Good luck!!  
+(there's no guarantee that everything works here, but it should)
+Remember that anything you do is at your own risk - the author **is not** responsible for anything you do! Good luck!!  
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
