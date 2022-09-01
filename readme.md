@@ -42,9 +42,14 @@ Formally it's a mobile Human-Machine Interface (HMI), as besides the NRF24L01 yo
 There aren't any kits at the moment, you'll need to buy everything by yourself - please visit the [wiki](https://github.com/Leoneq/iNapMalinka/wiki)!
 If you want to sell kits of Malinka, please contact me.
 
-## ✏ To-do
+## 🎨 Watch it go!
+<!--
+<div width="60%"> <a href="https://youtu.be/3jcoJ1oJTtw" title="sans gaming"><img src="https://res.cloudinary.com/marcomontalbano/image/upload/v1662052910/video_to_markdown/images/youtube--3jcoJ1oJTtw-c05b58ac6eb4c4700831b2b3070cd403.jpg" alt="sans gaming" /></a></div>
+-->
+* sans gaming: https://youtu.be/3jcoJ1oJTtw
+
+## ✏ To-do:
 * range test video
-* sans gaming video
 * doom gaming video
 * radio demo video
 * improve software a little bit
